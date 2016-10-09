@@ -7,3 +7,9 @@ project(':templet').projectDir = file('../templet')
 //服务模板例子项目
 include 'templetServer'
 project(':templetServer').projectDir = file('../service/templetServer')
+
+//----------------------------------------------------------------------------------------------------
+//工具类项目
+include 'tools'
+project(':tools').projectDir = file('../tools')
+

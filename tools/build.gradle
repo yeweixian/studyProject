@@ -1,0 +1,7 @@
+jar {
+	baseName = 'tools'
+	version = '1.0.0'
+}
+
+sourceCompatibility = 1.8
+
