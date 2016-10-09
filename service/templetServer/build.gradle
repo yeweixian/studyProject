@@ -3,8 +3,6 @@ jar {
 	version = '1.0.0'
 }
 
-sourceCompatibility = 1.8
-
 dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web")
 	testCompile("org.springframework.boot:spring-boot-starter-test")

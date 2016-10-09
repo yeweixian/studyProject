@@ -13,6 +13,8 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'spring-boot'
 
+    sourceCompatibility = 1.8
+
     repositories {
         jcenter()
         maven { url "http://repo.spring.io/snapshot" }
