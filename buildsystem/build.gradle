@@ -29,5 +29,7 @@ allprojects {
 }
 
 subprojects {
-
+    dependencies {
+        compile("org.apache.logging.log4j:log4j-core")
+    }
 }
