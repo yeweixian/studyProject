@@ -1,0 +1,8 @@
+jar {
+	baseName = 'dubbo'
+	version = '1.0.0'
+}
+
+dependencies {
+	compile("com.alibaba:dubbo:2.5.3")
+}
