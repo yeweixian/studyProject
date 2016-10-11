@@ -9,7 +9,15 @@ include 'templetServer'
 project(':templetServer').projectDir = file('../service/templetServer')
 
 //----------------------------------------------------------------------------------------------------
+//协议项目
+include 'protocol'
+project(':protocol').projectDir = file('../protocol')
+
 //工具类项目
 include 'tools'
 project(':tools').projectDir = file('../tools')
 
+//----------------------------------------------------------------------------------------------------
+//数据服务项目
+include 'dataServer'
+project(':dataServer').projectDir = file('../service/dataServer')
