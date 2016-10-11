@@ -17,6 +17,10 @@ project(':protocol').projectDir = file('../protocol')
 include 'tools'
 project(':tools').projectDir = file('../tools')
 
+//dubbo环境项目
+include 'dubbo'
+project(':dubbo').projectDir = file('../dubbo')
+
 //----------------------------------------------------------------------------------------------------
 //数据服务项目
 include 'dataServer'
