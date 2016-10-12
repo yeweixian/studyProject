@@ -13,14 +13,15 @@
     <!--provider-side-->
     <dubbo:protocol name="dubbo" port="20801" />
     <dubbo:provider timeout="6000" retries="0" delay="-1"/>
-    <!--<dubbo:service interface=""></dubbo:service>-->
 
+    <!--<dubbo:service interface=""></dubbo:service>-->
     <dubbo:service interface="com.danger.study.protocol.data.center.IBaseCenter" ref="baseCenter" />
     <bean class="com.danger.study.dataserver.center.BaseCenter" id="baseCenter" />
 
 
     <!--consumer-side-->
     <dubbo:consumer check="false"/>
+
     <!--<dubbo:reference interface=""></dubbo:reference>-->
 
 </beans>
