@@ -3,8 +3,3 @@ jar {
 	version = '1.0.0'
 }
 
-dependencies {
-	compile("com.alibaba:dubbo:2.5.3") {
-		exclude group:"org.springframework", module:"spring"
-	}
-}
