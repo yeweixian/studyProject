@@ -1,4 +1,4 @@
-package com.danger.study.center;
+package com.danger.study.dataserver.center;
 
 import com.danger.study.protocol.data.center.IBaseCenter;
 
