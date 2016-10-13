@@ -1,3 +1,4 @@
+//控件运行环境配置
 buildscript {
     repositories {
         mavenCentral()
@@ -10,6 +11,7 @@ buildscript {
     }
 }
 
+//buildsystem 做项目统筹 包括 控件、仓库、环境等配置
 allprojects {
     apply plugin: 'java'
     apply plugin: 'spring-boot'
