@@ -22,6 +22,11 @@ include 'dubbo'
 project(':dubbo').projectDir = file('../dubbo')
 
 //----------------------------------------------------------------------------------------------------
+//web服务项目
+include 'frontServer'
+project(':frontServer').projectDir = file('../webapp/frontServer')
+
+//----------------------------------------------------------------------------------------------------
 //数据服务项目
 include 'dataServer'
 project(':dataServer').projectDir = file('../service/dataServer')
