@@ -3,3 +3,8 @@ jar {
 	version = '1.0.0'
 }
 
+dependencies {
+	compile project(":protocol")
+	compile project(":tools")
+	compile project(":dubbo")
+}
