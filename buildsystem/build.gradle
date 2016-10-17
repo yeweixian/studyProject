@@ -36,7 +36,9 @@ allprojects {
 
 subprojects {
     dependencies {
-        compile("org.springframework.boot:spring-boot-starter-web")
+        compile("org.springframework.boot:spring-boot-starter-web") {
+            exclude group:"org.springframework.boot", module:"spring-boot-starter-logging"
+        }
 
         compile("com.alibaba:dubbo:2.5.3") {
             exclude group:"org.springframework", module:"spring"
