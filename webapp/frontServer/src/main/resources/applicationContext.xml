@@ -21,5 +21,6 @@
     <dubbo:consumer check="false"/>
 
     <!--<dubbo:reference interface=""></dubbo:reference>-->
+    <dubbo:reference interface="com.danger.study.protocol.data.center.IBaseCenter" id="baseCenter" />
 
 </beans>
