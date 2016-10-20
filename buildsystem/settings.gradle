@@ -26,6 +26,10 @@ project(':dubbo').projectDir = file('../dubbo')
 include 'frontServer'
 project(':frontServer').projectDir = file('../webapp/frontServer')
 
+//qqConnect服务项目
+include 'qqConnectServer'
+project(':qqConnectServer').projectDir = file('../webapp/qqConnectServer')
+
 //----------------------------------------------------------------------------------------------------
 //数据服务项目
 include 'dataServer'
