@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class Controller {
 
     @RequestMapping("/")
-    public void index(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void index(HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
 
         PrintWriter out = response.getWriter();
@@ -55,9 +55,8 @@ public class Controller {
         try {
             AccessToken accessTokenObj = (new Oauth()).getAccessTokenByRequest(request);
 
-            String accessToken   = null,
-                    openID        = null;
-            long tokenExpireIn = 0L;
+            String accessToken, openID;
+            long tokenExpireIn;
 
             if (accessTokenObj.getAccessToken().equals("")) {
 //                我们的网站被CSRF攻击了或者用户取消了授权
@@ -128,18 +127,15 @@ public class Controller {
                             weiboUserInfoBean.getBirthday().getDay() + "日");
                     //获取用户的生日信息 --------------------end
 
-                    StringBuffer sb = new StringBuffer();
-                    sb.append("<p>所在地:" + weiboUserInfoBean.getCountryCode() + "-" + weiboUserInfoBean.getProvinceCode() + "-" + weiboUserInfoBean.getCityCode()
-                            + weiboUserInfoBean.getLocation());
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("<p>所在地:").append(weiboUserInfoBean.getCountryCode()).append("-").append(weiboUserInfoBean.getProvinceCode()).append("-").append(weiboUserInfoBean.getCityCode()).append(weiboUserInfoBean.getLocation());
 
                     //获取用户的公司信息---------------------------start
                     ArrayList<Company> companies = weiboUserInfoBean.getCompanies();
                     if (companies.size() > 0) {
                         //有公司信息
-                        for (int i=0, j=companies.size(); i<j; i++) {
-                            sb.append("<p>曾服役过的公司：公司ID-" + companies.get(i).getID() + " 名称-" +
-                                    companies.get(i).getCompanyName() + " 部门名称-" + companies.get(i).getDepartmentName() + " 开始工作年-" +
-                                    companies.get(i).getBeginYear() + " 结束工作年-" + companies.get(i).getEndYear());
+                        for (Company company : companies) {
+                            sb.append("<p>曾服役过的公司：公司ID-").append(company.getID()).append(" 名称-").append(company.getCompanyName()).append(" 部门名称-").append(company.getDepartmentName()).append(" 开始工作年-").append(company.getBeginYear()).append(" 结束工作年-").append(company.getEndYear());
                         }
                     } else {
                         //没有公司信息
@@ -155,6 +151,7 @@ public class Controller {
                 out.println("<p> end -----------------------------------利用获取到的accessToken,openid 去获取用户在微博的昵称等信息 ---------------------------- end </p>");
             }
         } catch (QQConnectException e) {
+            e.printStackTrace();
         }
     }
 
@@ -170,7 +167,7 @@ public class Controller {
         System.out.println(accessToken);
         System.out.println(openID);
         //请开发者自行校验获取的con值是否有效
-        if (con != "") {
+        if (!"".equals(con)) {
             Topic topic = new Topic(accessToken, openID);
             try {
                 GeneralResultBean grb = topic.addTopic(con);
@@ -185,6 +182,5 @@ public class Controller {
         } else {
             System.out.println("获取到的值为空？");
         }
-
     }
 }
