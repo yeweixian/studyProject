@@ -28,8 +28,12 @@ import java.util.ArrayList;
 public class Controller {
 
     @RequestMapping("/")
-    public String index() {
-        return "Hello World!";
+    public void index(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html;charset=utf-8");
+
+        PrintWriter out = response.getWriter();
+
+        out.println("<a href=\"/login.do\">请使用你的QQ账号登陆</a>");
     }
 
     @RequestMapping("/login.do")
