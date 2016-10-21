@@ -40,7 +40,8 @@ public class Controller {
     public void doLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
         try {
-            response.sendRedirect(new Oauth().getAuthorizeURL(request));
+            String redirectUrl = new Oauth().getAuthorizeURL(request);
+            response.sendRedirect(redirectUrl);
         } catch (QQConnectException e) {
             e.printStackTrace();
         }
