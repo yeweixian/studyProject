@@ -1,33 +1,49 @@
-package com.qq.connect.demo;
+package com.danger.study.qqConnectServer.web;
 
 import com.qq.connect.QQConnectException;
 import com.qq.connect.api.OpenID;
 import com.qq.connect.api.qzone.PageFans;
+import com.qq.connect.api.qzone.Topic;
 import com.qq.connect.api.qzone.UserInfo;
 import com.qq.connect.javabeans.AccessToken;
+import com.qq.connect.javabeans.GeneralResultBean;
 import com.qq.connect.javabeans.qzone.PageFansBean;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.javabeans.weibo.Company;
 import com.qq.connect.oauth.Oauth;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
- * Date: 12-12-4
- * Time: 下午4:36
+ * Created by PC-361 on 2016/10/9.
  */
-public class AfterLoginRedirectServlet extends HttpServlet {
+@RestController
+public class Controller {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        doPost(request, response);
+    @RequestMapping("/")
+    public String index() {
+        return "Hello World!";
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping("/login.do")
+    public void doLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html;charset=utf-8");
+        try {
+            response.sendRedirect(new Oauth().getAuthorizeURL(request));
+        } catch (QQConnectException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/afterlogin.do")
+    public void doAfterLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html; charset=utf-8");
 
         PrintWriter out = response.getWriter();
@@ -36,11 +52,8 @@ public class AfterLoginRedirectServlet extends HttpServlet {
             AccessToken accessTokenObj = (new Oauth()).getAccessTokenByRequest(request);
 
             String accessToken   = null,
-                   openID        = null;
+                    openID        = null;
             long tokenExpireIn = 0L;
-
-
-
 
             if (accessTokenObj.getAccessToken().equals("")) {
 //                我们的网站被CSRF攻击了或者用户取消了授权
@@ -107,13 +120,13 @@ public class AfterLoginRedirectServlet extends HttpServlet {
 
                     //获取用户的生日信息 --------------------start
                     out.println("<p>尊敬的用户，你的生日是： " + weiboUserInfoBean.getBirthday().getYear()
-                                +  "年" + weiboUserInfoBean.getBirthday().getMonth() + "月" +
-                                weiboUserInfoBean.getBirthday().getDay() + "日");
+                            +  "年" + weiboUserInfoBean.getBirthday().getMonth() + "月" +
+                            weiboUserInfoBean.getBirthday().getDay() + "日");
                     //获取用户的生日信息 --------------------end
 
                     StringBuffer sb = new StringBuffer();
                     sb.append("<p>所在地:" + weiboUserInfoBean.getCountryCode() + "-" + weiboUserInfoBean.getProvinceCode() + "-" + weiboUserInfoBean.getCityCode()
-                             + weiboUserInfoBean.getLocation());
+                            + weiboUserInfoBean.getLocation());
 
                     //获取用户的公司信息---------------------------start
                     ArrayList<Company> companies = weiboUserInfoBean.getCompanies();
@@ -121,8 +134,8 @@ public class AfterLoginRedirectServlet extends HttpServlet {
                         //有公司信息
                         for (int i=0, j=companies.size(); i<j; i++) {
                             sb.append("<p>曾服役过的公司：公司ID-" + companies.get(i).getID() + " 名称-" +
-                            companies.get(i).getCompanyName() + " 部门名称-" + companies.get(i).getDepartmentName() + " 开始工作年-" +
-                            companies.get(i).getBeginYear() + " 结束工作年-" + companies.get(i).getEndYear());
+                                    companies.get(i).getCompanyName() + " 部门名称-" + companies.get(i).getDepartmentName() + " 开始工作年-" +
+                                    companies.get(i).getBeginYear() + " 结束工作年-" + companies.get(i).getEndYear());
                         }
                     } else {
                         //没有公司信息
@@ -136,11 +149,38 @@ public class AfterLoginRedirectServlet extends HttpServlet {
                 }
 
                 out.println("<p> end -----------------------------------利用获取到的accessToken,openid 去获取用户在微博的昵称等信息 ---------------------------- end </p>");
-
-
-
             }
         } catch (QQConnectException e) {
         }
+    }
+
+    @RequestMapping("/shuoshuo.do")
+    public void doShuoShuo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html;charset=utf-8");
+
+        request.setCharacterEncoding("utf-8");
+        String con = request.getParameter("con");
+        HttpSession session = request.getSession();
+        String accessToken = (String)session.getAttribute("demo_access_token");
+        String openID = (String)session.getAttribute("demo_openid");
+        System.out.println(accessToken);
+        System.out.println(openID);
+        //请开发者自行校验获取的con值是否有效
+        if (con != "") {
+            Topic topic = new Topic(accessToken, openID);
+            try {
+                GeneralResultBean grb = topic.addTopic(con);
+                if (grb.getRet() == 0) {
+                    response.getWriter().println("<a href=\"http://www.qzone.com\" target=\"_blank\">您的说说已发表成功，请登录Qzone查看</a>");
+                } else {
+                    response.getWriter().println("很遗憾的通知您，发表说说失败！原因： " + grb.getMsg());
+                }
+            } catch (QQConnectException e) {
+                System.out.println("抛异常了？");
+            }
+        } else {
+            System.out.println("获取到的值为空？");
+        }
+
     }
 }
