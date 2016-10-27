@@ -139,7 +139,8 @@ public class Controller {
                             sb.append("<p>曾服役过的公司：公司ID-").append(company.getID()).append(" 名称-").append(company.getCompanyName()).append(" 部门名称-").append(company.getDepartmentName()).append(" 开始工作年-").append(company.getBeginYear()).append(" 结束工作年-").append(company.getEndYear());
                         }
                     } else {
-                        //没有公司信息
+                        //没有公司信息 - test
+                        out.println("没有公司信息 - test");
                     }
                     //获取用户的公司信息---------------------------end
 
