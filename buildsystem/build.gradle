@@ -1,8 +1,8 @@
 //控件运行环境配置
 buildscript {
     repositories {
-        mavenLocal()
-        mavenCentral()
+//        mavenLocal()
+//        mavenCentral()
         jcenter()
         maven { url "http://repo.spring.io/snapshot" }
         maven { url "http://repo.spring.io/milestone" }
@@ -21,8 +21,8 @@ allprojects {
     targetCompatibility = 1.8
 
     repositories {
-        mavenLocal()
-        mavenCentral()
+//        mavenLocal()
+//        mavenCentral()
         jcenter()
         maven { url "http://repo.spring.io/snapshot" }
         maven { url "http://repo.spring.io/milestone" }
