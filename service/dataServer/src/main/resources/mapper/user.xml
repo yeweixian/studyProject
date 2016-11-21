@@ -4,6 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.danger.study.dataserver.mapper.UserMapper">
     <select id="findAllUser" resultType="com.danger.study.protocol.data.entity.User">
-        SELECT * FROM "user"
+        SELECT * FROM `user`
     </select>
 </mapper>
