@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ImportResource;
  * Created by PC-361 on 2016/10/9.
  */
 @Configuration
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 @ComponentScan
 @ImportResource({"classpath:applicationContext.xml"})
 public class Application {
