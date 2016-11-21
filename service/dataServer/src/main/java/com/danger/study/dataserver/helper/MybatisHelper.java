@@ -23,13 +23,13 @@ public class MybatisHelper {
 
     private SqlSessionFactory sqlSessionFactory;
 
-    @Value("${spring.datasource.driver-class-name}")
+    @Value("${datasource_driver-class-name}")
     private String mybatis_driver;
-    @Value("${spring.datasource.url}")
+    @Value("${datasource_url}")
     private String mybatis_url;
-    @Value("${spring.datasource.username}")
+    @Value("${datasource_username}")
     private String mybatis_username;
-    @Value("${spring.datasource.password}")
+    @Value("${datasource_password}")
     private String mybatis_password;
 
     @PostConstruct
