@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.danger.study.dataserver.mapper.UserMapper">
+    <select id="findAllUser" resultType="com.danger.study.protocol.data.entity.User">
+        SELECT * FROM danger_member."user"
+    </select>
+</mapper>
