@@ -55,6 +55,8 @@ subprojects {
 
         compile("mysql:mysql-connector-java")
 
+        compile("com.github.pagehelper:pagehelper:4.1.6")
+
         testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 }
