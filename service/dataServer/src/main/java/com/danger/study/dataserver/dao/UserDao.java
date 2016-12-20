@@ -18,10 +18,14 @@ public class UserDao {
     @Autowired
     private MybatisHelper mybatisHelper;
 
+    public List<User> findAllUser(SqlSession session) {
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        return userMapper.findAllUser();
+    }
+
     public List<User> findAllUser() {
         try (SqlSession session = mybatisHelper.openSession()) {
-            UserMapper userMapper = session.getMapper(UserMapper.class);
-            return userMapper.findAllUser();
+            return findAllUser(session);
         }
     }
 }

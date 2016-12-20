@@ -2,6 +2,8 @@ package com.danger.study.dataserver.center;
 
 import com.danger.study.dataserver.Application;
 import com.danger.study.dataserver.dao.UserDao;
+import com.danger.study.protocol.common.ApiResult;
+import com.danger.study.protocol.data.affair.IUserAffair;
 import com.danger.study.protocol.data.entity.User;
 import com.danger.study.tools.common.JsonUtils;
 import org.junit.Test;
@@ -37,6 +39,15 @@ public class BaseCenterTest {
         for (User user : userList) {
             System.out.println(JsonUtils.getJsonString(user));
         }
+        System.out.println("----------------------------");
+    }
+
+    @Test
+    public void testFindAllUserByAffair() {
+        IUserAffair userAffair = context.getBean(IUserAffair.class);
+        ApiResult<List<User>> result = userAffair.findAllUser();
+        System.out.println("----------------------------");
+        System.out.println(JsonUtils.getJsonString(result));
         System.out.println("----------------------------");
     }
 
