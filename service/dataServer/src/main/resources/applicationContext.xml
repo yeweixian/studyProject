@@ -24,7 +24,8 @@
     <!--<dubbo:service interface=""></dubbo:service>-->
     <dubbo:service interface="com.danger.study.protocol.data.center.IBaseCenter" ref="baseCenter" />
     <bean class="com.danger.study.dataserver.center.BaseCenter" id="baseCenter" />
-
+    <dubbo:service interface="com.danger.study.protocol.data.affair.IUserAffair" ref="userAffair" />
+    <bean class="com.danger.study.dataserver.affair.UserAffair" id="userAffair" />
 
     <!--consumer-side-->
     <dubbo:consumer check="false"/>
