@@ -37,7 +37,8 @@ public class CountTest {
                 countAffair.addCountByTestId(1, 2);
                 count.add(1);
             };
-            r1.run();
+            Thread t1 = new Thread(r1);
+            t1.start();
             Runnable r2 = () -> {
                 try {
                     Thread.sleep((new Random()).nextInt(4 * 1000));
@@ -47,7 +48,8 @@ public class CountTest {
                 countAffair.subCountByTestId(1, 1);
                 count.add(-1);
             };
-            r2.run();
+            Thread t2 = new Thread(r2);
+            t2.start();
         }
         while (count.size() < 100) {
             System.out.println(count.size());
