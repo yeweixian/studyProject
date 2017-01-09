@@ -30,7 +30,7 @@ public class CountTest {
         for (int i = 0; i < 50; i ++) {
             Runnable r1 = () -> {
                 try {
-                    Thread.sleep((new Random()).nextInt(4));
+                    Thread.sleep((new Random()).nextInt(10));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -40,7 +40,7 @@ public class CountTest {
             r1.run();
             Runnable r2 = () -> {
                 try {
-                    Thread.sleep((new Random()).nextInt(4));
+                    Thread.sleep((new Random()).nextInt(10));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
