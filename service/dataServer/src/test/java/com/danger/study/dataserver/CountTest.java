@@ -28,7 +28,7 @@ public class CountTest {
         List<Integer> count = new ArrayList<>();
         CountAffair countAffair = context.getBean(CountAffair.class);
         for (int i = 0; i < 50; i ++) {
-            Runnable r1 = () -> {
+            Thread t1 = new Thread(() -> {
                 try {
                     Thread.sleep((new Random()).nextInt(4 * 1000));
                 } catch (InterruptedException e) {
@@ -36,10 +36,8 @@ public class CountTest {
                 }
                 countAffair.addCountByTestId(1, 2);
                 count.add(1);
-            };
-            Thread t1 = new Thread(r1);
-            t1.start();
-            Runnable r2 = () -> {
+            });
+            Thread t2 = new Thread(() -> {
                 try {
                     Thread.sleep((new Random()).nextInt(4 * 1000));
                 } catch (InterruptedException e) {
@@ -47,8 +45,9 @@ public class CountTest {
                 }
                 countAffair.subCountByTestId(1, 4);
                 count.add(-1);
-            };
-            Thread t2 = new Thread(r2);
+            });
+            //执行
+            t1.start();
             t2.start();
         }
         while (count.size() < 100) {
