@@ -57,7 +57,7 @@ public class CountTest {
                 e.printStackTrace();
             }
         }
-        System.out.println(JsonUtils.getJsonString(count));
+        System.out.println(count.size() + " --- " + JsonUtils.getJsonString(count));
     }
 
     @Test
