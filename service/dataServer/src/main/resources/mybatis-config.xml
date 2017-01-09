@@ -48,5 +48,6 @@
     </environments>
     <mappers>
         <mapper resource="mapper/user.xml"/>
+        <mapper resource="mapper/count.xml"/>
     </mappers>
 </configuration>
