@@ -45,14 +45,13 @@ public class CountTest {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                countAffair.subCountByTestId(1, 1);
+                countAffair.subCountByTestId(1, 4);
                 count.add(-1);
             };
             Thread t2 = new Thread(r2);
             t2.start();
         }
         while (count.size() < 100) {
-            System.out.println(count.size());
             try {
                 Thread.sleep(5 * 1000);
             } catch (InterruptedException e) {
