@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by PC-361 on 2017/1/9.
@@ -28,11 +29,21 @@ public class CountTest {
         CountAffair countAffair = context.getBean(CountAffair.class);
         for (int i = 0; i < 50; i ++) {
             Runnable r1 = () -> {
+                try {
+                    Thread.sleep((new Random()).nextInt(4));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 countAffair.addCountByTestId(1, 2);
                 count.add(1);
             };
             r1.run();
             Runnable r2 = () -> {
+                try {
+                    Thread.sleep((new Random()).nextInt(4));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 countAffair.subCountByTestId(1, 1);
                 count.add(-1);
             };
