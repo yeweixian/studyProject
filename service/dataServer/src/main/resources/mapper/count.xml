@@ -9,4 +9,11 @@
     <update id="subCountByTestId">
         UPDATE danger_member.t_count SET `count` = `count` - #{num} WHERE testId = #{testId}
     </update>
+
+    <select id="findByTestId" resultType="com.danger.study.protocol.data.entity.Count">
+        SELECT * FROM danger_member.t_count WHERE testId = #{testId}
+    </select>
+    <update id="changeCountByTestId" parameterType="com.danger.study.protocol.data.entity.Count">
+        UPDATE danger_member.t_count SET `count` = #{count} WHERE testId = #{testId}
+    </update>
 </mapper>

@@ -1,6 +1,7 @@
 package com.danger.study.dataserver.affair;
 
 import com.danger.study.dataserver.dao.CountDao;
+import com.danger.study.protocol.data.entity.Count;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,16 @@ public class CountAffair extends AbsAffair {
     public void subCountByTestId(long testId, long num) {
         process(session -> {
             countDao._subCountByTestId(session, testId, num);
+            return null;
+        });
+    }
+
+    public void countByTestId(long testId, long num) {
+        process(session -> {
+            Count count = countDao._findByTestId(session, testId);
+            count.setCount(count.getCount() + num);
+            Thread.sleep(1000 * 2);
+            countDao._changeCount(session, count);
             return null;
         });
     }

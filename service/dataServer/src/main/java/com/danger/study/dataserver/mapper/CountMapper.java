@@ -1,5 +1,6 @@
 package com.danger.study.dataserver.mapper;
 
+import com.danger.study.protocol.data.entity.Count;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -8,4 +9,7 @@ import org.apache.ibatis.annotations.Param;
 public interface CountMapper {
     void addCountByTestId(@Param("testId") long testId, @Param("num") long num);
     void subCountByTestId(@Param("testId") long testId, @Param("num") long num);
+
+    Count findByTestId(long testId);
+    void changeCountByTestId(Count count);
 }
