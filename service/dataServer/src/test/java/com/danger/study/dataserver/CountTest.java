@@ -61,5 +61,32 @@ public class CountTest {
     }
 
     @Test
+    public void testChangeCount() {
+        List<Integer> count = new ArrayList<>();
+        CountAffair countAffair = context.getBean(CountAffair.class);
+        for (int i = 0; i < 100; i ++) {
+            Thread t = new Thread(() -> {
+                try {
+                    Thread.sleep(2 * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                countAffair.countByTestId(1, 2);
+                count.add(1);
+            });
+            //执行
+            t.start();
+        }
+        while (count.size() < 100) {
+            try {
+                Thread.sleep(5 * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(count.size() + " --- " + JsonUtils.getJsonString(count));
+    }
+
+    @Test
     public void test() {}
 }
