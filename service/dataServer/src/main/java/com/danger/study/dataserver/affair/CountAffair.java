@@ -28,7 +28,7 @@ public class CountAffair extends AbsAffair {
         });
     }
 
-    public void countByTestId(long testId, long num) {
+    public synchronized void countByTestId(long testId, long num) {
         process(session -> {
             Count count = countDao._findByTestId(session, testId);
             count.setCount(count.getCount() + num);
