@@ -6,8 +6,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.ApplicationContext;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.test.context.junit4.SpringRunner;
+import redis.clients.jedis.Jedis;
 
 /**
  * Created by PC-361 on 2017/1/20.
@@ -21,7 +22,11 @@ public class BaseRedisTest {
 
     @Test
     public void testRedis() {
-        RedisTemplate template = context.getBean(RedisTemplate.class);
+//        RedisTemplate template = context.getBean(RedisTemplate.class);
+        JedisConnectionFactory jedisConnectionFactory = context.getBean(JedisConnectionFactory.class);
+        Jedis jedis = (Jedis) jedisConnectionFactory.getConnection().getNativeConnection();
+        jedis.set("test", "test");
+        jedis.close();
     }
 
     @Test

@@ -9,7 +9,7 @@
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" />
-    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" p:connectionFactory="jedisConnectionFactory" />
+    <!--<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" p:connectionFactory="jedisConnectionFactory" />-->
 
     <!--rpcHelper bean-->
     <bean class="com.danger.study.dubbo.tools.RpcHelper" id="rpcHelper" />
