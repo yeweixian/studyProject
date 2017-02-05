@@ -18,6 +18,6 @@ public class UserAffair extends AbsAffair implements IUserAffair {
 
     @Override
     public ApiResult<List<User>> findAllUser() {
-        return process(session -> userDao.findAllUser(session));
+        return process(session -> userDao._findAllUser(session));
     }
 }
