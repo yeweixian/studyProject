@@ -1,8 +1,11 @@
 package com.danger.study.lock.tools;
 
+import com.danger.study.lock.intf.IFunction;
+import org.apache.log4j.Logger;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.stereotype.Component;
+import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPoolConfig;
 
 import javax.annotation.PostConstruct;
@@ -44,5 +47,19 @@ public class LockRedisHelper {
             return jedisConnectionFactory.getConnection();
         }
         return null;
+    }
+
+    public final <T> T process(IFunction<T> function) {
+        T result = null;
+        RedisConnection connection = getConnection();
+        Jedis jedis = (Jedis) connection.getNativeConnection();
+        try {
+            result = function.action(jedis);
+        } catch (Exception e) {
+            Logger.getLogger(LockRedisHelper.class).warn(e.toString(), e);
+        } finally {
+            connection.close();
+        }
+        return result;
     }
 }
