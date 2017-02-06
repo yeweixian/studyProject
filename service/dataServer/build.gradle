@@ -7,4 +7,5 @@ dependencies {
 	compile project(":protocol")
 	compile project(":tools")
 	compile project(":dubbo")
+	compile project(":lock")
 }
