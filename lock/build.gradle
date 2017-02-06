@@ -1,0 +1,5 @@
+jar {
+	baseName = 'lock'
+	version = '1.0.0'
+}
+

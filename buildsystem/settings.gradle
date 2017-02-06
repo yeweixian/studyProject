@@ -21,6 +21,10 @@ project(':tools').projectDir = file('../tools')
 include 'dubbo'
 project(':dubbo').projectDir = file('../dubbo')
 
+//分布式锁项目
+include 'lock'
+project(':lock').projectDir = file('../lock')
+
 //----------------------------------------------------------------------------------------------------
 //web服务项目
 include 'frontServer'
