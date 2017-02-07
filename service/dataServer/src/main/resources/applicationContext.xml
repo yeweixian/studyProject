@@ -12,6 +12,7 @@
     <bean class="com.danger.study.dubbo.tools.RpcHelper" id="rpcHelper" />
     <!--lock mode-->
     <bean class="com.danger.study.lock.tools.LockRedisHelper" id="lockRedisHelper" />
+    <bean class="com.danger.study.lock.tools.LockHelper" id="lockHelper" />
 
     <!--application-shared-->
     <dubbo:application name="dataServer" />

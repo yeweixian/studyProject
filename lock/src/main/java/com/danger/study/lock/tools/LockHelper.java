@@ -1,0 +1,31 @@
+package com.danger.study.lock.tools;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+/**
+ * Created by PC-361 on 2017/2/7.
+ */
+@Component
+public class LockHelper {
+
+    @Autowired
+    private LockRedisHelper lockRedisHelper;
+
+    public boolean lock(String lockKey, long waitTime, long timeout) throws InterruptedException {
+        //使用 setnx 判断是否 获得锁
+        Long result = lockRedisHelper.process(jedis -> jedis.setnx(lockKey, String.valueOf(System.currentTimeMillis() + timeout)));
+        if (result == 1) return true;
+        while (true) {
+            //使用 get 获取 上次锁的 销毁时间
+            long oldExpireTime = Long.valueOf(lockRedisHelper.process(jedis -> jedis.get(lockKey)));
+            if (oldExpireTime < System.currentTimeMillis()) {
+                //使用 getset 添加 新锁的 销毁时间
+                String timeStr = lockRedisHelper.process(jedis -> jedis.getSet(lockKey, String.valueOf(System.currentTimeMillis() + timeout)));
+                long currentExpireTime = Long.valueOf(timeStr);
+                if (currentExpireTime == oldExpireTime) return true;
+            }
+            Thread.sleep(100);
+        }
+    }
+}
