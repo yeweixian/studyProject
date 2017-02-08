@@ -34,4 +34,10 @@ public class LockHelper {
             Thread.sleep(100);
         }
     }
+
+    public void release(String lockKey, long actionBeginTime, long timeout) {
+        if (System.currentTimeMillis() < actionBeginTime + timeout) {
+            lockRedisHelper.process(jedis -> jedis.getSet(lockKey, String.valueOf(System.currentTimeMillis())));
+        }
+    }
 }
