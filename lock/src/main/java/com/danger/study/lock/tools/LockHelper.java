@@ -15,7 +15,7 @@ public class LockHelper {
     @Autowired
     private LockRedisHelper lockRedisHelper;
 
-    public boolean lock(String lockKey, long waitTime, long timeout) throws InterruptedException {
+    public boolean lock(String lockKey, long waitTime, long timeout) {
         long beginTime = System.currentTimeMillis();
         //使用 setnx 判断是否 获得锁
         Long result = lockRedisHelper.process(jedis -> jedis.setnx(lockKey, String.valueOf(System.currentTimeMillis() + timeout)));
@@ -31,13 +31,15 @@ public class LockHelper {
                 long currentExpireTime = Long.valueOf(timeStr);
                 if (currentExpireTime == oldExpireTime) return true;
             }
-            Thread.sleep(100);
         }
     }
 
     public void release(String lockKey, long actionBeginTime, long timeout) {
-        if (System.currentTimeMillis() < actionBeginTime + timeout) {
-            lockRedisHelper.process(jedis -> jedis.getSet(lockKey, String.valueOf(System.currentTimeMillis())));
-        }
+        lockRedisHelper.process(jedis -> {
+            if (System.currentTimeMillis() < actionBeginTime + timeout) {
+                jedis.getSet(lockKey, String.valueOf(System.currentTimeMillis()));
+            }
+            return null;
+        });
     }
 }

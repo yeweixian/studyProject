@@ -92,8 +92,8 @@ public class CountTest {
 
     @Test
     public void testCountInRedis() {
-        List<Integer> end = new ArrayList<>();
         List<Integer> begin = new ArrayList<>();
+        List<Integer> end = new ArrayList<>();
         CountRedis countRedis = context.getBean(CountRedis.class);
         for (int i = 0; i < 100; i ++) {
             final int tn = i;
@@ -104,7 +104,11 @@ public class CountTest {
                     e.printStackTrace();
                 }
                 begin.add(tn);
-                countRedis.countByTestId(1, 2);
+                try {
+                    countRedis.countByTestId(1, 2);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 end.add(tn);
             });
             //执行
