@@ -1,7 +1,9 @@
 package com.danger.study.dataserver;
 
 import com.danger.study.dataserver.affair.CountAffair;
+import com.danger.study.dataserver.helper.RedisHelper;
 import com.danger.study.dataserver.redis.CountRedis;
+import com.danger.study.lock.tools.LockRedisHelper;
 import com.danger.study.tools.common.JsonUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -117,6 +119,18 @@ public class CountTest {
         }
         System.out.println(begin.size() + " b--- " + JsonUtils.getJsonString(begin));
         System.out.println(end.size() + " e--- " + JsonUtils.getJsonString(end));
+    }
+
+    @Test
+    public void testLockRedisHelper() {
+        LockRedisHelper lockRedisHelper = context.getBean(LockRedisHelper.class);
+        lockRedisHelper.process(jedis -> jedis.set("lockRedisHelper", "lockRedisHelper"));
+    }
+
+    @Test
+    public void testRedisHelper() {
+        RedisHelper redisHelper = context.getBean(RedisHelper.class);
+        redisHelper.getConnection();
     }
 
     @Test

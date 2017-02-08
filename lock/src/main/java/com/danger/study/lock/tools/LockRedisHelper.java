@@ -30,6 +30,7 @@ public class LockRedisHelper {
         jedisConnectionFactory.setPassword("Redis!@#123");
         jedisConnectionFactory.setPort(6379);
         jedisConnectionFactory.setTimeout(1000);
+        jedisConnectionFactory.afterPropertiesSet();
         return true;
     }
 
