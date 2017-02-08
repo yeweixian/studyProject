@@ -29,7 +29,7 @@ public class LockRedisHelper {
         jedisConnectionFactory.setHostName("192.168.83.49");
         jedisConnectionFactory.setPassword("Redis!@#123");
         jedisConnectionFactory.setPort(6379);
-        jedisConnectionFactory.setTimeout(1000);
+        jedisConnectionFactory.setTimeout(2000);
         jedisConnectionFactory.afterPropertiesSet();
         return true;
     }
