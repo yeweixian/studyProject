@@ -9,6 +9,7 @@ public enum ApiError implements IApiError, Serializable {
     SUCCESS(0, "成功"),
     ACTION_ERROR(-10, "误操作"),
     AFFAIR_EXCETION(-100, "通用事务异常"),
+    LOCK_ERROR(-101, "获取锁超时失败"),
     UNKNOWN_ERROR(-1000, "未知错误");
 
     private int code = -1;
