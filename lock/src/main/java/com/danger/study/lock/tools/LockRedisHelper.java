@@ -26,7 +26,7 @@ public class LockRedisHelper {
     public boolean init() {
         jedisConnectionFactory = new JedisConnectionFactory(jedisPoolConfig());
         jedisConnectionFactory.setDatabase(1);
-        jedisConnectionFactory.setHostName("192.168.83.49");
+        jedisConnectionFactory.setHostName("192.168.20.58");
         jedisConnectionFactory.setPassword("Redis!@#123");
         jedisConnectionFactory.setPort(6379);
         jedisConnectionFactory.setTimeout(2000);

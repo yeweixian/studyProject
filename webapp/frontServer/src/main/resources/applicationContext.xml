@@ -10,7 +10,7 @@
 
     <!--application-shared-->
     <dubbo:application name="frontServer" />
-    <dubbo:registry address="zookeeper://192.168.83.40:2181" timeout="10000" />
+    <dubbo:registry address="zookeeper://192.168.20.49:2181" timeout="10000" />
     <!--监控中心配置，用于配置连接监控中心相关信息，可选-->
     <!--<dubbo:monitor protocol="registry"/>-->
 
