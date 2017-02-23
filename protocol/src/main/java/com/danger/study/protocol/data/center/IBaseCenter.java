@@ -6,4 +6,6 @@ package com.danger.study.protocol.data.center;
 public interface IBaseCenter {
 
     String getBaseMsg();
+
+    String getHelloMsg(String msg);
 }

@@ -11,4 +11,9 @@ public class BaseCenter implements IBaseCenter {
     public String getBaseMsg() {
         return "BaseMsg";
     }
+
+    @Override
+    public String getHelloMsg(String msg) {
+        return "Hello! " + msg + ", welcome to my zone!";
+    }
 }
