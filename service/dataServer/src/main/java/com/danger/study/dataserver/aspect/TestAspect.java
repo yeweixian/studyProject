@@ -13,16 +13,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestAspect {
 
+    private ThreadLocal<Long> timeLog = new ThreadLocal<>();
+
     @Pointcut("execution(public * com.danger.study.dataserver..*.*(..))")
     public void test() {}
 
     @Before("test()")
     public void doBefore() {
         System.out.println(" ------ AOP doBefore function!");
+        timeLog.set(System.currentTimeMillis());
     }
 
     @AfterReturning(returning = "ret", pointcut = "test()")
     public void doAfterReturning(Object ret) {
+        System.out.println(" ------ action time: " + (System.currentTimeMillis() - timeLog.get()) + "ms");
         System.out.println(" ------ AOP doAfterReturning: " + ret);
     }
 }
